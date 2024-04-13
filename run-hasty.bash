@@ -62,6 +62,6 @@ do
 	../gomar.coco3.level2.vdg  $TRACE_ARGS -disk L2.dsk  -rom_8000 coco3.rom -internal_rom_listing coco3.rom.list  -cart axiom41.rom  -external_rom_listing axiom41.rom.list --inkey_file=inkey -max 180'000'000 --show_vdg_screen=1 --bracket_terminal --expect='Level 2 V3;April 04, 2024  00:00;Shell+ v2.2a;{Term|02}/DD:' | tee _out
 
 	count=$(( $count + 1 ))
-	echo "TEST (#$count) $T/$x OKAY." >&2
+	echo "OKAY -- TEST (#$count) /tmp/for-$T/$x" >&2
 done
-echo RAN $count TESTS. >&2
+echo "OKAY -- RAN $count TESTS: /tmp/for-$T" >&2
