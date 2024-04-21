@@ -33,8 +33,8 @@ mkdir -p /tmp/for-$T
 cd $SHELF/gomar
 go build --tags=coco3,level2,vdg,cocoio,gime,$TRACE_TAGS  -o /tmp/for-$T/gomar.coco3.level2.vdg  gomar.go
 
-cd ../frobio/frob3/lemma/
-GOBIN=/home/strick/two/coco-shelf/bin GOPATH=/home/strick/two/coco-shelf /usr/bin/go build -o /tmp/for-$T/waiter -x server.go
+cd ../frobio/frob3/lemma/waiter/
+GOBIN=$SHELF/bin GOPATH=$SHELF /usr/bin/go build -o /tmp/for-$T/waiter -x lemma-waiter.go
 
 cd /tmp/for-$T/
 ./waiter -cards=1 -ro=$SHELF/build-frobio/results/LEMMINGS -lan=127.0.0.1 -config_by_dhcp=0 >waiter.log 2>&1 &
@@ -52,6 +52,7 @@ do
 	os9 copy -l -r $SHELF/whippets/hasty/$x/startup L2.dsk,startup
 
 	cp -v $SHELF/whippets/hasty/$x/inkey inkey
+	cp -v $SHELF/whippets/hasty/$x/expect expect
 	cp -v $SHELF/toolshed/cocoroms/coco3.rom  coco3.rom
 	cp -v $SHELF/toolshed/cocoroms/coco3.rom.list  coco3.rom.list
 	cp -v $SHELF/toolshed/hdbdos/hdbsdc.rom  hdbsdc.rom
@@ -59,7 +60,7 @@ do
 	cp -v $SHELF/build-frobio/axiom41.rom axiom41.rom
 	cp -v $SHELF/build-frobio/axiom41.rom.list axiom41.rom.list
 
-	../gomar.coco3.level2.vdg  $TRACE_ARGS -disk L2.dsk  -rom_8000 coco3.rom -internal_rom_listing coco3.rom.list  -cart axiom41.rom  -external_rom_listing axiom41.rom.list --inkey_file=inkey -max 180'000'000 --show_vdg_screen=1 --bracket_terminal --expect='Level 2 V3;April 04, 2024  00:00;Shell+ v2.2a;{Term|02}/DD:' | tee _out
+	../gomar.coco3.level2.vdg  $TRACE_ARGS -disk L2.dsk  -rom_8000 coco3.rom -internal_rom_listing coco3.rom.list  -cart axiom41.rom  -external_rom_listing axiom41.rom.list -n --inkey_file=inkey -max 180'000'000 --show_vdg_screen=1 --bracket_terminal --expect_file=expect | tee _out
 
 	count=$(( $count + 1 ))
 	echo "OKAY -- TEST (#$count) /tmp/for-$T/$x" >&2
