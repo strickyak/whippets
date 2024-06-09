@@ -37,7 +37,7 @@ cd ../frobio/frob3/lemma/waiter/
 GOBIN=$SHELF/bin GOPATH=$SHELF /usr/bin/go build -o /tmp/for-$T/waiter -x lemma-waiter.go
 
 cd /tmp/for-$T/
-./waiter -cards=1 -lemmings_root=$SHELF/build-frobio/lemma/LEMMINGS -lan=127.0.0.1 -config_by_dhcp=0 >waiter.log 2>&1 &
+./waiter -cards=1 -lemmings_root=$SHELF/build-frobio/pizga-base/Internal/LEMMINGS -lan=127.0.0.1 -config_by_dhcp=0 >waiter.log 2>&1 &
 DAEMON=$!
 trap "EXIT=\$? ; kill $DAEMON ; exit \$EXIT" 0 1 2 3 15
 
